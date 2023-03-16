@@ -5,5 +5,5 @@ import java.util.Date;
 public record SearchPriceByBrandAndProductAtDateRequest(
         long brandId,
         long productId,
-        Date date
+        String date
 ) {}

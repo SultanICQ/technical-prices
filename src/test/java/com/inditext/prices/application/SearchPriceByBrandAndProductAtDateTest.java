@@ -2,6 +2,7 @@ package com.inditext.prices.application;
 
 import com.inditext.prices.domain.Price;
 import com.inditext.prices.domain.PriceRepository;
+import com.inditext.prices.domain.exception.InvalidDateException;
 import com.inditext.prices.domain.exception.PriceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,9 @@ class SearchPriceByBrandAndProductAtDateTest {
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final String START_DATE = "2020-06-15 00:00:00";
     private static final Date DATE = toDate(START_DATE);
+    private static final String DATE_AS_STRING = START_DATE;
+    private static final String BAD_DATE = "INVALID_DATE_VALUE";
+
     private static final int PRICE_ID = 3;
     private static final String END_DATE = "2020-06-15 11:00:00";
     private static final double PRICE = 30.50;
@@ -43,7 +47,7 @@ class SearchPriceByBrandAndProductAtDateTest {
 
     @Test
     public void should_return_valid_price() {
-        SearchPriceByBrandAndProductAtDateRequest request = new SearchPriceByBrandAndProductAtDateRequest(BRAND_ID, PRODUCT_ID, DATE);
+        SearchPriceByBrandAndProductAtDateRequest request = new SearchPriceByBrandAndProductAtDateRequest(BRAND_ID, PRODUCT_ID, DATE_AS_STRING);
         SearchPriceByBrandAndProductAtDateResponse expected = new SearchPriceByBrandAndProductAtDateResponse(
                 BRAND_ID, PRODUCT_ID, PRICE_ID, START_DATE, END_DATE, PRICE
         );
@@ -58,10 +62,17 @@ class SearchPriceByBrandAndProductAtDateTest {
 
     @Test
     public void should_return_exception_when_price_not_found() {
-        SearchPriceByBrandAndProductAtDateRequest request = new SearchPriceByBrandAndProductAtDateRequest(BRAND_ID, PRODUCT_ID, DATE);
+        SearchPriceByBrandAndProductAtDateRequest request = new SearchPriceByBrandAndProductAtDateRequest(BRAND_ID, PRODUCT_ID, DATE_AS_STRING);
         given(repository.searchByBrandProductAtDate(BRAND_ID, PRODUCT_ID, DATE)).willReturn(Optional.empty());
 
         assertThrows(PriceNotFoundException.class, () -> sut.execute(request));
+    }
+
+    @Test
+    public void should_return_exception_when_date_is_not_parseable() {
+        SearchPriceByBrandAndProductAtDateRequest request = new SearchPriceByBrandAndProductAtDateRequest(BRAND_ID, PRODUCT_ID, BAD_DATE);
+
+        assertThrows(InvalidDateException.class, () -> sut.execute(request));
     }
 
     private static Date toDate(String date) {
