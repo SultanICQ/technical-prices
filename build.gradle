@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group = 'com.inditext'
+group = 'com.technical'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
@@ -19,7 +19,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation("org.springframework.boot:spring-boot-starter-webflux:3.0.2")
+	testImplementation('org.springframework.boot:spring-boot-starter-webflux:3.0.4')
 }
 
 tasks.named('test') {
