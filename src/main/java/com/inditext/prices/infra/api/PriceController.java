@@ -25,18 +25,12 @@ public class PriceController {
             @RequestParam("product_id") long productId,
             @RequestParam("date") String date
     ) {
-        try {
-            return ResponseEntity.ok().body(
-                    searchPriceByBrandAndProductAtDate.execute(new SearchPriceByBrandAndProductAtDateRequest(
-                            brandId,
-                            productId,
-                            date
-                    ))
-            );
-        } catch (PriceNotFoundException e) {
-            return ResponseEntity.noContent().build();
-        } catch (InvalidDateException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok().body(
+                searchPriceByBrandAndProductAtDate.execute(new SearchPriceByBrandAndProductAtDateRequest(
+                        brandId,
+                        productId,
+                        date
+                ))
+        );
     }
 }

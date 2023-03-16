@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,23 +57,17 @@ class PriceControllerTest {
     }
 
     @Test
-    public void should_return_empty_response_if_price_not_exist() {
+    public void should_return_exception_if_price_not_exist() {
         given(searchPriceByBrandAndProductAtDate.execute(REQUEST)).willThrow(PriceNotFoundException.class);
-        ResponseEntity<SearchPriceByBrandAndProductAtDateResponse> expected = ResponseEntity.noContent().build();
 
-        ResponseEntity<SearchPriceByBrandAndProductAtDateResponse> response = sut.searchPriceByBrandAndProductAtDate(BRAND_ID, PRODUCT_ID, DATE_AS_STRING);
-
-        assertEquals(expected, response);
+        assertThrows(PriceNotFoundException.class, () -> sut.searchPriceByBrandAndProductAtDate(BRAND_ID, PRODUCT_ID, DATE_AS_STRING) );
     }
 
     @Test
-    public void should_return_bad_request_if_dates_are_not_parseable() {
+    public void should_return_exception_if_dates_are_not_parseable() {
         given(searchPriceByBrandAndProductAtDate.execute(INVALID_REQUEST)).willThrow(InvalidDateException.class);
-        ResponseEntity<SearchPriceByBrandAndProductAtDateResponse> expected = ResponseEntity.badRequest().build();
 
-        ResponseEntity<SearchPriceByBrandAndProductAtDateResponse> response = sut.searchPriceByBrandAndProductAtDate(BRAND_ID, PRODUCT_ID, BAD_DATE);
-
-        assertEquals(expected, response);
+        assertThrows(InvalidDateException.class, () -> sut.searchPriceByBrandAndProductAtDate(BRAND_ID, PRODUCT_ID, BAD_DATE) );
     }
 
 }
