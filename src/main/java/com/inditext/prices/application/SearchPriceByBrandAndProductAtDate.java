@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class SearchPriceByBrandAndProductAtDate {
 
     private final PriceRepository repository;
