@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class Exception {
     @ExceptionHandler(PriceNotFoundException.class)
-    public ResponseEntity priceNotFound(HttpServletRequest req, Exception e) {
+    public ResponseEntity priceNotFound() {
         return ResponseEntity.noContent().build();
     }
     @ExceptionHandler(InvalidDateException.class)
-    public ResponseEntity invalidDate(HttpServletRequest req, Exception e) {
+    public ResponseEntity invalidDate() {
         return ResponseEntity.badRequest().build();
     }
 }
