@@ -24,11 +24,11 @@ import static org.mockito.BDDMockito.given;
 class PriceControllerTest {
     private static final int BRAND_ID = 1;
     private static final int PRODUCT_ID = 35455;
-    private static final String START_DATE = "2020-06-15 00:00:00";
+    private static final String START_DATE = "2020-06-15-00.00.00";
     private static final String DATE_AS_STRING = START_DATE;
     private static final String BAD_DATE = "INVALID_DATE_VALUE";
     private static final int PRICE_ID = 3;
-    private static final String END_DATE = "2020-06-15 11:00:00";
+    private static final String END_DATE = "2020-06-15-11.00.00";
     private static final double PRICE = 30.50;
     private static final SearchPriceByBrandAndProductAtDateRequest REQUEST = new SearchPriceByBrandAndProductAtDateRequest(BRAND_ID, PRODUCT_ID, DATE_AS_STRING);
     private static final SearchPriceByBrandAndProductAtDateRequest INVALID_REQUEST = new SearchPriceByBrandAndProductAtDateRequest(BRAND_ID, PRODUCT_ID, BAD_DATE);

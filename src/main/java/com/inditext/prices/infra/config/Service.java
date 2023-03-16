@@ -2,6 +2,7 @@ package com.inditext.prices.infra.config;
 
 import com.inditext.prices.application.SearchPriceByBrandAndProductAtDate;
 import com.inditext.prices.domain.PriceRepository;
+import com.inditext.prices.infra.repository.H2CrudPriceRepository;
 import com.inditext.prices.infra.repository.H2PriceRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +18,8 @@ public class Service {
     }
 
     @Bean
-    public PriceRepository priceRepository() {
-        return new H2PriceRepository();
+    public PriceRepository priceRepository(H2CrudPriceRepository repository, SimpleDateFormat dateFormat) {
+        return new H2PriceRepository(repository, dateFormat);
     }
 
     @Bean

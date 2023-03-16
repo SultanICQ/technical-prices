@@ -23,14 +23,14 @@ import static org.mockito.BDDMockito.given;
 class SearchPriceByBrandAndProductAtDateTest {
     private static final int BRAND_ID = 1;
     private static final int PRODUCT_ID = 35455;
-    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static final String START_DATE = "2020-06-15 00:00:00";
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss");
+    private static final String START_DATE = "2020-06-15-00.00.00";
     private static final Date DATE = toDate(START_DATE);
     private static final String DATE_AS_STRING = START_DATE;
     private static final String BAD_DATE = "INVALID_DATE_VALUE";
 
     private static final int PRICE_ID = 3;
-    private static final String END_DATE = "2020-06-15 11:00:00";
+    private static final String END_DATE = "2020-06-15-11.00.00";
     private static final double PRICE = 30.50;
     private static final int PRIORITY = 1;
     private static final Currency CURRENCY = Currency.getInstance("EUR");
